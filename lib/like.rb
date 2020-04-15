@@ -1,7 +1,8 @@
+# Likes the last 25 tweets that used #bonjour_monde
 require 'dotenv'
 require 'twitter'
 
-Dotenv.load('.env')
+Dotenv.load
 
 client = Twitter::REST::Client.new do |config|
   config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
@@ -10,7 +11,6 @@ client = Twitter::REST::Client.new do |config|
   config.access_token_secret = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
 end
 
-# ligne qui permet de tweeter sur ton compte
-client.update('My 3rd Ruby tweet !!!!')
 
+client.favorite (client.search("#bonjour_monde", result_type: "recent").take(25))
 
